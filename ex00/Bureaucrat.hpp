@@ -22,7 +22,7 @@ public:
 
 class Bureaucrat
 {
-protected:
+private:
     std::string name;
     unsigned int grade;
 
