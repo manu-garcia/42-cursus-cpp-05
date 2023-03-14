@@ -6,20 +6,6 @@
 #define MIN_GRADE 150
 #define MAX_GRADE 1
 
-class GradeTooHighException : public std::runtime_error
-{
-public:
-    GradeTooHighException()
-        : std::runtime_error("The grade is too high!") {}
-};
-
-class GradeTooLowException : public std::runtime_error
-{
-public:
-    GradeTooLowException()
-        : std::runtime_error("The grade is too low!") {}
-};
-
 class Bureaucrat
 {
 private:
@@ -38,6 +24,20 @@ public:
     unsigned int getGrade() const;
     void incrementGrade(void);
     void decrementGrade(void);
+
+    class GradeTooHighException : public std::runtime_error
+    {
+    public:
+        GradeTooHighException()
+            : std::runtime_error("The grade is too high!") {}
+    };
+
+    class GradeTooLowException : public std::runtime_error
+    {
+    public:
+        GradeTooLowException()
+            : std::runtime_error("The grade is too low!") {}
+    };
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
