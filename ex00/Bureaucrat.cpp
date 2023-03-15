@@ -22,7 +22,7 @@ Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : name(name), grade
         throw GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat)
+Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat) : name(bureaucrat.getName())
 {
     *this = bureaucrat;
     std::cout << getName() << ", bureaucrat Copy constructor." << std::endl;
@@ -39,7 +39,6 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &bureaucrat)
 {
-    name = bureaucrat.getName();
     grade = bureaucrat.getGrade();
 
     std::cout << getName() << ", bureaucrat copy operator." << std::endl;
