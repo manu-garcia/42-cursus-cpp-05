@@ -25,7 +25,7 @@ Form::Form(std::string name, bool isSigned, unsigned int gradeToSign, unsigned i
         throw GradeTooLowException();
 }
 
-Form::Form(const Form &form)
+Form::Form(const Form &form): name(form.getName()), gradeToSign(form.getGradeToSign()), gradeToExec(form.getGradeToExec())
 {
     *this = form;
     std::cout << getName() << ", form Copy constructor." << std::endl;
@@ -42,10 +42,7 @@ Form::~Form()
 
 Form &Form::operator=(const Form &form)
 {
-    name = form.getName();
     isSigned = form.getIsSigned();
-    gradeToSign = form.getGradeToSign();
-    gradeToExec = form.getGradeToExec();
 
     std::cout << getName() << ", form copy operator." << std::endl;
 
