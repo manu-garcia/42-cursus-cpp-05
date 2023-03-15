@@ -2,6 +2,7 @@ NAME 		= bureaucrat
 SRC_DIR		= ./
 SRC 		= 	$(SRC_DIR)/main.cpp \
 				$(SRC_DIR)/Bureaucrat.cpp \
+				$(SRC_DIR)/Form.cpp \
 
 CC 			= c++
 INCLUDES	= 

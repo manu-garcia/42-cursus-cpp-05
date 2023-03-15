@@ -6,6 +6,8 @@
 #define MIN_GRADE 150
 #define MAX_GRADE 1
 
+class Form;
+
 class Bureaucrat
 {
 private:
@@ -24,6 +26,7 @@ public:
     unsigned int getGrade() const;
     void incrementGrade(void);
     void decrementGrade(void);
+    void signForm(Form &form);
 
     class GradeTooHighException : public std::runtime_error
     {

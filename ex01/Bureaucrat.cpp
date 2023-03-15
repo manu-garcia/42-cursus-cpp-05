@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 #define DEFAULT_NAME "Un-named bureaucrat"
 
@@ -77,6 +78,17 @@ void Bureaucrat::decrementGrade(void)
 
     grade++;
     std::cout << getName() << ", grade decremented to " << grade << std::endl;
+}
+
+void Bureaucrat::signForm(Form &form)
+{
+    try {
+        form.beSigned(*this);
+        std::cout << getName() << " signed " << form.getName() << std::endl;
+    }
+    catch (std::exception &e) {
+        std::cout << getName() << " could not sign " << form.getName() << std::endl;
+    }
 }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat)

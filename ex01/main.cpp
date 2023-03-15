@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main(void)
 {
@@ -89,6 +90,40 @@ int main(void)
 
         bureaucrat.decrementGrade();
         bureaucrat.decrementGrade();
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    std::cout << std::endl << "Signing forms" << std::endl;
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << "Expecting bureaucrat to be able to sign a form!" << std::endl;
+        Bureaucrat bureaucrat("Good signer bureaucrat", 1);
+        Form form("Signeable form", false, 1, 1);
+
+        std::cout << bureaucrat;
+        std::cout << form;
+
+        bureaucrat.signForm(form);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << "Expecting bureaucrat unable to sign a form!" << std::endl;
+        Bureaucrat bureaucrat("Bad signer bureaucrat", 2);
+        Form form("Un-signeable form", false, 1, 1);
+
+        bureaucrat.signForm(form);
     }
     catch (std::exception &e)
     {
