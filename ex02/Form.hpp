@@ -1,0 +1,48 @@
+#ifndef FORM_HPP
+#define FORM_HPP
+
+#include <iostream>
+
+class Bureaucrat;
+
+class Form
+{
+private:
+    std::string name;
+    bool isSigned;
+    unsigned int gradeToSign;
+    unsigned int gradeToExec;
+
+public:
+    Form();
+    Form(std::string name, bool isSigned, unsigned int gradeToSign, unsigned int gradeToExec);
+    Form(const Form &form);
+    ~Form();
+
+    Form &operator=(const Form &form);
+
+    std::string getName() const;
+    bool getIsSigned() const;
+    unsigned int getGradeToSign() const;
+    unsigned int getGradeToExec() const;
+
+    void beSigned(const Bureaucrat &bureaucrat);
+
+    class GradeTooHighException : public std::runtime_error
+    {
+    public:
+        GradeTooHighException()
+            : std::runtime_error("The grade is too high!") {}
+    };
+
+    class GradeTooLowException : public std::runtime_error
+    {
+    public:
+        GradeTooLowException()
+            : std::runtime_error("The grade is too low!") {}
+    };
+};
+
+std::ostream &operator<<(std::ostream &os, const Form &form);
+
+#endif
