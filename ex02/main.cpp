@@ -1,7 +1,9 @@
 #include <iostream>
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main(void)
 {
@@ -103,7 +105,7 @@ int main(void)
     {
         std::cout << "Expecting bureaucrat to be able to sign a form!" << std::endl;
         Bureaucrat bureaucrat("Good signer bureaucrat", 1);
-        Form form("Signeable form", false, 1, 1);
+        ShrubberyCreationForm form("ShrubberyCreationForm target");
 
         std::cout << bureaucrat;
         std::cout << form;
@@ -120,13 +122,124 @@ int main(void)
     try
     {
         std::cout << "Expecting bureaucrat unable to sign a form!" << std::endl;
-        Bureaucrat bureaucrat("Bad signer bureaucrat", 2);
-        Form form("Un-signeable form", false, 1, 1);
+        Bureaucrat bureaucrat("Bad signer bureaucrat", MIN_GRADE);
+        ShrubberyCreationForm form("ShrubberyCreationForm target");
 
         bureaucrat.signForm(form);
     }
     catch (std::exception &e)
     {
+    }
+
+    std::cout << std::endl << "Executing forms" << std::endl;
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << "Expecting bureaucrat to be able to execute a form!" << std::endl;
+        Bureaucrat bureaucrat("Good executor bureaucrat", 1);
+        ShrubberyCreationForm form("ShrubberyCreationForm target");
+
+        std::cout << bureaucrat;
+        std::cout << form;
+
+        bureaucrat.executeForm(form);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << "Expecting bureaucrat unable to execute a form!" << std::endl;
+        Bureaucrat bureaucrat("Bad executor bureaucrat", MIN_GRADE);
+        ShrubberyCreationForm form("ShrubberyCreationForm target");
+
+        std::cout << bureaucrat;
+        std::cout << form;
+
+        bureaucrat.executeForm(form);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    std::cout << std::endl << "Executing Robotomy forms" << std::endl;
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << "Expecting bureaucrat to be able to execute a form!" << std::endl;
+        Bureaucrat bureaucrat("Good executor bureaucrat", 1);
+        RobotomyRequestForm form("RobotomyRequestForm target");
+
+        std::cout << bureaucrat;
+        std::cout << form;
+
+        bureaucrat.executeForm(form);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << "Expecting bureaucrat unable to execute a form!" << std::endl;
+        Bureaucrat bureaucrat("Bad executor bureaucrat", MIN_GRADE);
+        RobotomyRequestForm form("RobotomyRequestForm target");
+
+        std::cout << bureaucrat;
+        std::cout << form;
+
+        bureaucrat.executeForm(form);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    std::cout << std::endl << "Executing PresidentialPardon forms" << std::endl;
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << "Expecting bureaucrat to be able to execute a form!" << std::endl;
+        Bureaucrat bureaucrat("Good executor bureaucrat", 1);
+        PresidentialPardonForm form("PresidentialPardonForm target");
+
+        std::cout << bureaucrat;
+        std::cout << form;
+
+        bureaucrat.executeForm(form);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    try
+    {
+        std::cout << "Expecting bureaucrat unable to execute a form!" << std::endl;
+        Bureaucrat bureaucrat("Bad executor bureaucrat", MIN_GRADE);
+        PresidentialPardonForm form("PresidentialPardonForm target");
+
+        std::cout << bureaucrat;
+        std::cout << form;
+
+        bureaucrat.executeForm(form);
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
     }
 
     return 0;

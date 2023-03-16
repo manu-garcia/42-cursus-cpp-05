@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #define DEFAULT_NAME "Un-named bureaucrat"
 
@@ -79,7 +79,7 @@ void Bureaucrat::decrementGrade(void)
     std::cout << getName() << ", grade decremented to " << grade << std::endl;
 }
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm &form)
 {
     try {
         form.beSigned(*this);
@@ -87,6 +87,17 @@ void Bureaucrat::signForm(Form &form)
     }
     catch (std::exception &e) {
         std::cout << getName() << " could not sign " << form.getName() << " because " << e.what() << "." << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(const AForm &form)
+{
+    try {
+        form.execute(*this);
+        std::cout << getName() << " executed " << form.getName() << std::endl;
+    }
+    catch (std::exception &e) {
+        std::cout << getName() << " could not execute " << form.getName() << " because " << e.what() << "." << std::endl;
     }
 }
 

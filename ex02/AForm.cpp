@@ -1,4 +1,4 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
 #define DEFAULT_NAME "Un-named form"
@@ -9,12 +9,12 @@
 // Constructors / Destructor
 ///////////////////////////////////////////////////////////////////////////////
 
-Form::Form() : name(DEFAULT_NAME), isSigned(false), gradeToSign(MIN_GRADE), gradeToExec(MIN_GRADE)
+AForm::AForm() : name(DEFAULT_NAME), isSigned(false), gradeToSign(MIN_GRADE), gradeToExec(MIN_GRADE)
 {
     std::cout << getName() << ", form Default constructor." << std::endl;
 }
 
-Form::Form(std::string name, bool isSigned, unsigned int gradeToSign, unsigned int gradeToExec) : name(name), isSigned(isSigned), gradeToSign(gradeToSign), gradeToExec(gradeToExec)
+AForm::AForm(std::string name, bool isSigned, unsigned int gradeToSign, unsigned int gradeToExec) : name(name), isSigned(isSigned), gradeToSign(gradeToSign), gradeToExec(gradeToExec)
 {
     std::cout << getName() << ", form constructor with params." << std::endl;
 
@@ -25,13 +25,13 @@ Form::Form(std::string name, bool isSigned, unsigned int gradeToSign, unsigned i
         throw GradeTooLowException();
 }
 
-Form::Form(const Form &form): name(form.getName()), gradeToSign(form.getGradeToSign()), gradeToExec(form.getGradeToExec())
+AForm::AForm(const AForm &form) : name(form.getName()), gradeToSign(form.getGradeToSign()), gradeToExec(form.getGradeToExec())
 {
     *this = form;
     std::cout << getName() << ", form Copy constructor." << std::endl;
 }
 
-Form::~Form()
+AForm::~AForm()
 {
     std::cout << getName() << ", form destructor." << std::endl;
 }
@@ -40,7 +40,7 @@ Form::~Form()
 // Operators
 ///////////////////////////////////////////////////////////////////////////////
 
-Form &Form::operator=(const Form &form)
+AForm &AForm::operator=(const AForm &form)
 {
     isSigned = form.getIsSigned();
 
@@ -53,27 +53,27 @@ Form &Form::operator=(const Form &form)
 // Member functions
 ///////////////////////////////////////////////////////////////////////////////
 
-std::string Form::getName(void) const
+std::string AForm::getName(void) const
 {
     return name;
 }
 
-bool Form::getIsSigned(void) const
+bool AForm::getIsSigned(void) const
 {
     return isSigned;
 }
 
-unsigned int Form::getGradeToSign(void) const
+unsigned int AForm::getGradeToSign(void) const
 {
     return gradeToSign;
 }
 
-unsigned int Form::getGradeToExec(void) const
+unsigned int AForm::getGradeToExec(void) const
 {
     return gradeToExec;
 }
 
-void Form::beSigned(const Bureaucrat &bureaucrat)
+void AForm::beSigned(const Bureaucrat &bureaucrat)
 {
     std::cout << getName() << ", form is trying to be signed by " << bureaucrat.getName() << std::endl;
 
@@ -81,14 +81,22 @@ void Form::beSigned(const Bureaucrat &bureaucrat)
     {
         throw GradeTooLowException();
     }
-    
+
     isSigned = true;
     std::cout << "Signed!!" << std::endl;
 }
 
-std::ostream &operator<<(std::ostream &os, const Form &form)
+void AForm::execute(Bureaucrat const & executor) const
 {
-    return os << form.getName() << ", form signed " << form.getIsSigned() <<
-            ", grade to sign " << form.getGradeToSign() <<
-            ", grade to exec " << form.getGradeToExec() << "." << std::endl;
+    std::cout << getName() << ", " << getName() << " is trying to be executed by " << executor.getName() << std::endl;
+
+    if (executor.getGrade() > getGradeToExec())
+    {
+        throw GradeTooLowException();
+    }
+}
+
+std::ostream &operator<<(std::ostream &os, const AForm &form)
+{
+    return os << form.getName() << ", form signed " << form.getIsSigned() << ", grade to sign " << form.getGradeToSign() << ", grade to exec " << form.getGradeToExec() << "." << std::endl;
 }
