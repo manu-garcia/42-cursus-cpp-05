@@ -4,6 +4,18 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
+
+void testInternMakingForm(std::string formName, std::string target)
+{
+	Intern	intern;
+	AForm	*form;
+	form = intern.makeForm(formName, target);
+    if (form) {
+        delete form;
+        form = NULL;   
+    }
+}
 
 int main(void)
 {
@@ -241,6 +253,19 @@ int main(void)
     {
         std::cerr << e.what() << std::endl;
     }
+
+    std::cout << std::endl << "Testing Interns making forms" << std::endl;
+    std::cout << std::endl;
+
+    testInternMakingForm("MadeUpForm", "target");
+    std::cout << std::endl;
+
+    testInternMakingForm(INTERN_SHRUBERRY_FORM, "target");
+    std::cout << std::endl;
+    testInternMakingForm(INTERN_ROBOTOMY_FORM, "target");
+    std::cout << std::endl;
+    testInternMakingForm(INTERN_PRESIDENTIAL_FORM, "target");
+    std::cout << std::endl;
 
     return 0;
 }
