@@ -17,7 +17,7 @@ public:
     AForm();
     AForm(std::string name, bool isSigned, unsigned int gradeToSign, unsigned int gradeToExec);
     AForm(const AForm &form);
-    ~AForm();
+    virtual ~AForm();
 
     AForm &operator=(const AForm &form);
 
@@ -27,7 +27,7 @@ public:
     unsigned int getGradeToExec() const;
 
     void beSigned(const Bureaucrat &bureaucrat);
-    void execute(Bureaucrat const & executor) const;
+    virtual void execute(Bureaucrat const & executor) const;
 
     class GradeTooHighException : public std::runtime_error
     {
